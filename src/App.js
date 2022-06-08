@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
 
+//initial expenses
 const DUMMY_EXPENSES = [
   {
     id: "e1",
@@ -19,20 +20,23 @@ const DUMMY_EXPENSES = [
     id: "e3",
     title: "Car Insurance",
     amount: 424,
-    date: new Date(2023, 11, 9),
+    date: new Date(2022, 11, 9),
   },
 ];
 
 function App() {
+  //initial expenses
   const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
 
-  const addNewExpense = (expense) => {
-    setExpenses([expense, ...expenses]);
+  const addExpenseHandler = (expense) => {
+    setExpenses((prevExpenses) => {
+      return [expense, ...prevExpenses];
+    });
   };
 
   return (
     <div>
-      <NewExpense onSaveNewExpense={addNewExpense} />
+      <NewExpense onSaveNewExpense={addExpenseHandler} />
       <Expenses items={expenses} />
     </div>
   );
